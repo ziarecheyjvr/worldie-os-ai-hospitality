@@ -102,7 +102,33 @@
       toggle.setAttribute("aria-expanded", open);
       document.body.style.overflow = open ? "hidden" : "";
     });
-    addEventListener("scroll", () => nav.classList.toggle("is-scrolled", scrollY > 20), { passive: true });
+    // Slide the nav away when scrolling down, bring it back when scrolling up
+    let lastY = scrollY;
+    addEventListener("scroll", () => {
+      const y = scrollY;
+      nav.classList.toggle("is-scrolled", y > 20);
+      if (y > 160 && y > lastY + 2 && !nav.classList.contains("is-open")) nav.classList.add("is-hidden");
+      else if (y < lastY - 2 || y <= 160) nav.classList.remove("is-hidden");
+      lastY = y;
+    }, { passive: true });
+
+    // Sliding marker behind the active / hovered nav link
+    const bar = nav.querySelector(".nav__links");
+    const marker = document.createElement("span");
+    marker.className = "nav__indicator";
+    bar.prepend(marker);
+    const moveTo = (a) => {
+      if (!a) { marker.style.opacity = "0"; return; }
+      marker.style.opacity = "1";
+      marker.style.width = `${a.offsetWidth}px`;
+      marker.style.transform = `translate3d(${a.offsetLeft}px, 0, 0)`;
+    };
+    const current = () => bar.querySelector("a.is-active");
+    bar.querySelectorAll("a").forEach((a) => a.addEventListener("pointerenter", () => moveTo(a)));
+    bar.addEventListener("pointerleave", () => moveTo(current()));
+    addEventListener("load", () => moveTo(current()));
+    addEventListener("resize", () => moveTo(current()));
+    document.fonts && document.fonts.ready.then(() => moveTo(current()));
   }
 
   const footHost = document.querySelector("[data-footer]");
@@ -125,7 +151,7 @@
     </footer>`;
   }
 
-  /* ---------- Split headlines into words for blur reveal ---------- */
+  /* ---------- Split headlines into words that slide up out of a mask ---------- */
   document.querySelectorAll("[data-words]").forEach((el) => {
     let i = 0;
     const walk = (node) => {
@@ -152,6 +178,13 @@
       });
     };
     walk(el);
+    // Each word sits in its own clipping mask so it can rise into view
+    el.querySelectorAll(".w").forEach((w) => {
+      const mask = document.createElement("span");
+      mask.className = "wm";
+      w.replaceWith(mask);
+      mask.append(w);
+    });
     el.classList.add("words");
   });
 
@@ -602,6 +635,81 @@
       if (!form.reportValidity()) return;
       form.classList.add("is-sent");
       form.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    });
+  }
+
+  /* ---------- Tech background: grid + drifting gold light ---------- */
+  const fx = document.createElement("div");
+  fx.className = "bg-fx";
+  fx.setAttribute("aria-hidden", "true");
+  fx.innerHTML = '<div class="bg-fx__orb bg-fx__orb--a"></div><div class="bg-fx__orb bg-fx__orb--b"></div><div class="bg-fx__grid"></div>';
+  document.body.prepend(fx);
+
+  /* ---------- Smooth, inertial scrolling (Lenis) ---------- */
+  if (!reduce && window.Lenis) {
+    document.documentElement.style.scrollBehavior = "auto";
+    const lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
+    const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+    // In-page links glide instead of jumping
+    document.querySelectorAll('a[href^="#"]').forEach((a) =>
+      a.addEventListener("click", (e) => {
+        const target = document.querySelector(a.getAttribute("href"));
+        if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -90 }); }
+      })
+    );
+    // Freeze page scroll while the mobile menu is open
+    const toggle = document.querySelector(".nav__toggle");
+    if (toggle) toggle.addEventListener("click", () => (document.querySelector(".nav").classList.contains("is-open") ? lenis.stop() : lenis.start()));
+  }
+
+  /* ---------- Pointer effects (mouse/trackpad only) ---------- */
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!reduce && finePointer) {
+    // Soft spotlight that trails the cursor across hero areas
+    document.querySelectorAll(".hero__bg").forEach((bg) => {
+      const spot = document.createElement("div");
+      spot.className = "spotlight";
+      bg.append(spot);
+      let tx = innerWidth / 2, ty = innerHeight * 0.3, x = tx, y = ty, running = false;
+      const step = () => {
+        x += (tx - x) * 0.08; y += (ty - y) * 0.08;
+        spot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        if (Math.abs(tx - x) + Math.abs(ty - y) > 0.5) requestAnimationFrame(step); else running = false;
+      };
+      addEventListener("pointermove", (e) => {
+        const r = bg.getBoundingClientRect();
+        tx = e.clientX - r.left; ty = e.clientY - r.top;
+        if (!running) { running = true; requestAnimationFrame(step); }
+      }, { passive: true });
+    });
+
+    // Gentle 3D tilt on cards
+    document.querySelectorAll(".card.glass, .vertical, .trust, .config, .routing, .check").forEach((el) => {
+      el.setAttribute("data-tilt", "");
+      const max = el.matches(".card, .vertical, .trust") ? 6 : 3;
+      el.addEventListener("pointermove", (e) => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        el.classList.add("is-tilting");
+        el.style.setProperty("--ry", `${(px * max).toFixed(2)}deg`);
+        el.style.setProperty("--rx", `${(-py * max).toFixed(2)}deg`);
+        el.style.setProperty("--ty", "-4px");
+      });
+      el.addEventListener("pointerleave", () => {
+        el.classList.remove("is-tilting");
+        ["--rx", "--ry", "--ty"].forEach((p) => el.style.removeProperty(p));
+      });
+    });
+
+    // Primary buttons lean slightly toward the cursor
+    document.querySelectorAll(".btn--gold").forEach((b) => {
+      b.addEventListener("pointermove", (e) => {
+        const r = b.getBoundingClientRect();
+        const dx = (e.clientX - r.left - r.width / 2) * 0.18, dy = (e.clientY - r.top - r.height / 2) * 0.3;
+        b.style.transform = `translate3d(${dx}px, ${dy - 2}px, 0)`;
+      });
+      b.addEventListener("pointerleave", () => (b.style.transform = ""));
     });
   }
 })();
