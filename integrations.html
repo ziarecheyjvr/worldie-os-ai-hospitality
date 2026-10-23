@@ -11,12 +11,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <style>
-    .hub { position: relative; aspect-ratio: 1; max-width: 480px; width: 100%; margin: 0 auto; }
-    .hub svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .hub svg path { fill: none; stroke: rgba(212,175,55,.25); stroke-width: .4; }
-    .hub svg path.flow { stroke: var(--gold-hi); stroke-width: .6; stroke-dasharray: 1.5 6; animation: flow 2s linear infinite; }
-    .hub__node { position: absolute; transform: translate(-50%,-50%); padding: 12px 18px; border-radius: 14px; font-weight: 500; font-size: 15px; white-space: nowrap; }
-    .hub__core { left: 50%; top: 50%; padding: 22px 26px; text-align: center; }
+    /* Request flow: one booking request moving through your rules */
+    .rflow { position: relative; padding: clamp(22px, 3vw, 36px); border-radius: var(--radius-lg); margin-bottom: clamp(48px, 6vw, 80px); overflow: hidden; }
+    .rflow__track { position: absolute; background: rgba(255,255,255,.08); border-radius: 2px; }
+    .rflow__track i { position: absolute; inset: 0; transform-origin: left; transform: scaleX(var(--p, 0)); background: var(--gold-grad); box-shadow: 0 0 14px var(--gold); transition: transform .9s var(--ease); }
+    .rflow__pulse { position: absolute; top: 50%; left: calc(var(--p, 0) * 100%); width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #fff6d8; box-shadow: 0 0 0 6px rgba(212,175,55,.2), 0 0 24px 4px var(--gold); transition: left .9s var(--ease); }
+    .rflow__stages { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .stage-card { display: grid; gap: 12px; align-content: start; justify-items: center; text-align: center; opacity: .38; transition: opacity .6s var(--ease); }
+    .stage-card.on { opacity: 1; }
+    .stage-card__node { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; color: var(--gold-hi); background: #0c0c0d; border: 1px solid rgba(212,175,55,.3); margin-top: 28px; transition: all .6s var(--ease); }
+    .stage-card__node svg { width: 26px; height: 26px; }
+    .stage-card.on .stage-card__node { background: var(--gold-grad); color: #160f00; border-color: transparent; box-shadow: 0 0 0 8px rgba(212,175,55,.1), 0 0 40px -4px var(--gold-glow); }
+    .stage-card__label { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-hi); }
+    .stage-card__body { width: 100%; padding: 14px; border-radius: 16px; background: rgba(255,255,255,.035); border: 1px solid var(--line); font-size: 14px; text-align: left; display: grid; gap: 8px; min-height: 132px; align-content: start; }
+    .stage-card.on .stage-card__body { border-color: rgba(212,175,55,.3); }
+    .stage-card__body .bubble { margin: 0; font-size: 13.5px; }
+    .rule { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); opacity: .3; transition: opacity .4s var(--ease); }
+    .rule::before { content: ""; flex: none; width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(212,175,55,.4); }
+    .rule.ok, .rule.hold { opacity: 1; color: var(--text); }
+    .rule.ok::before { background: rgba(212,175,55,.15) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f6e1a1' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12.5l4.5 4.5L19 7.5'/></svg>") center / 10px no-repeat; }
+    .rule.hold::before { background: rgba(212,175,55,.25); box-shadow: 0 0 10px var(--gold); }
+    .approve { display: flex; gap: 8px; }
+    .approve span { flex: 1; text-align: center; padding: 8px; border-radius: 10px; font-size: 12.5px; border: 1px solid var(--line-strong); color: var(--muted); transition: all .4s var(--ease); }
+    .approve span:first-child.pressed { background: var(--gold-grad); color: #160f00; border-color: transparent; transform: scale(.97); }
+    @media (max-width: 860px) {
+      .rflow__stages { grid-template-columns: 1fr; gap: 10px; }
+      .rflow__track i { transform-origin: top; transform: scaleY(var(--p, 0)); }
+      .rflow__pulse { top: calc(var(--p, 0) * 100%); left: 50%; }
+      .stage-card { grid-template-columns: 64px 1fr; justify-items: start; text-align: left; column-gap: 16px; }
+      .stage-card__node { grid-row: span 2; margin-top: 0; }
+      .stage-card__body { min-height: 0; }
+    }
     .trust { padding: clamp(28px, 3vw, 40px); display: grid; gap: 14px; align-content: start; }
     .trust h3 { margin: 0; font-weight: 400; font-size: clamp(26px, 2.4vw, 34px); letter-spacing: -0.03em; line-height: 1.1; }
     .trust p { margin: 0; color: var(--muted); }
@@ -37,19 +62,40 @@
 
     <section class="section" style="padding-top:20px">
       <div class="container">
-        <div class="hub reveal" style="margin-bottom:clamp(48px,6vw,80px)">
-          <svg viewBox="0 0 100 100" aria-hidden="true">
-            <path d="M50 50 L18 18"/><path class="flow" d="M50 50 L18 18"/>
-            <path d="M50 50 L82 18"/><path class="flow" d="M50 50 L82 18" style="animation-delay:-.5s"/>
-            <path d="M50 50 L18 82"/><path class="flow" d="M50 50 L18 82" style="animation-delay:-1s"/>
-            <path d="M50 50 L82 82"/><path class="flow" d="M50 50 L82 82" style="animation-delay:-1.5s"/>
-            <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(212,175,55,.1)" stroke-width=".3"/>
-          </svg>
-          <div class="hub__node glass" style="left:18%;top:18%">Your systems</div>
-          <div class="hub__node glass" style="left:82%;top:18%">Your channels</div>
-          <div class="hub__node glass" style="left:18%;top:82%">Your team</div>
-          <div class="hub__node glass" style="left:82%;top:82%">Your rules</div>
-          <div class="hub__node hub__core glass glass--gold"><span class="gold-text serif" style="font-size:26px">Worldie OS</span><div class="small muted">Staff approval</div></div>
+        <div class="rflow glass reveal" data-rflow aria-label="How a booking request moves through your rules">
+          <div class="rflow__track"><i></i><span class="rflow__pulse"></span></div>
+          <div class="rflow__stages">
+            <div class="stage-card">
+              <span class="stage-card__node" data-icon="whatsapp"></span>
+              <span class="stage-card__label">Customer</span>
+              <div class="stage-card__body"><p class="bubble">Could we book the private dining room for 12 on Saturday?</p></div>
+            </div>
+            <div class="stage-card">
+              <span class="stage-card__node" data-icon="cpu"></span>
+              <span class="stage-card__label">Worldie OS</span>
+              <div class="stage-card__body">
+                <span class="rule" data-rule>Knowledge checked</span>
+                <span class="rule" data-rule>Permissions checked</span>
+                <span class="rule" data-rule data-hold>Staff approval required</span>
+              </div>
+            </div>
+            <div class="stage-card">
+              <span class="stage-card__node" data-icon="user"></span>
+              <span class="stage-card__label">Your team</span>
+              <div class="stage-card__body">
+                <span>Private dining · 12 guests · Sat 21:00</span>
+                <div class="approve"><span data-approve>Approve</span><span>Decline</span></div>
+              </div>
+            </div>
+            <div class="stage-card">
+              <span class="stage-card__node" data-icon="calendar"></span>
+              <span class="stage-card__label">Your system</span>
+              <div class="stage-card__body">
+                <span class="tag tag--green" style="width:fit-content">Booking confirmed</span>
+                <span class="muted">Added to your connected booking system.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="grid-3">

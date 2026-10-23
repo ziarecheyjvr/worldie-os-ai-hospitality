@@ -502,6 +502,59 @@
     auto();
   });
 
+  /* ---------- Integrations: a request moving through your rules ---------- */
+  document.querySelectorAll("[data-rflow]").forEach((box) => {
+    const stages = [...box.querySelectorAll(".stage-card")];
+    const rules = [...box.querySelectorAll("[data-rule]")];
+    const approve = box.querySelector("[data-approve]");
+    const setP = (p) => box.style.setProperty("--p", p);
+    // Run the track exactly from the first stage's circle to the last one (row or column layout)
+    const track = box.querySelector(".rflow__track");
+    const nodes = [...box.querySelectorAll(".stage-card__node")];
+    const fitTrack = () => {
+      const b = box.getBoundingClientRect();
+      const c = (n) => { const r = n.getBoundingClientRect(); return [r.left + r.width / 2 - b.left, r.top + r.height / 2 - b.top]; };
+      const [x1, y1] = c(nodes[0]), [x2, y2] = c(nodes[nodes.length - 1]);
+      const vertical = Math.abs(x2 - x1) < 2;
+      Object.assign(track.style, vertical
+        ? { left: `${x1 - 1}px`, top: `${y1}px`, width: "2px", height: `${y2 - y1}px`, right: "auto", bottom: "auto" }
+        : { left: `${x1}px`, top: `${y1 - 1}px`, width: `${x2 - x1}px`, height: "2px", right: "auto", bottom: "auto" });
+    };
+    fitTrack();
+    addEventListener("resize", fitTrack);
+    const showAll = () => {
+      stages.forEach((s) => s.classList.add("on"));
+      rules.forEach((r) => r.classList.add(r.hasAttribute("data-hold") ? "hold" : "ok"));
+      approve.classList.add("pressed");
+      setP(1);
+    };
+    let timers = [];
+    const at = (ms, fn) => timers.push(setTimeout(fn, ms));
+    const play = () => {
+      timers.forEach(clearTimeout); timers = [];
+      stages.forEach((s) => s.classList.remove("on"));
+      rules.forEach((r) => r.classList.remove("ok", "hold"));
+      approve.classList.remove("pressed");
+      setP(0);
+      at(200, () => stages[0].classList.add("on"));
+      at(900, () => setP(1 / 3));
+      at(1700, () => stages[1].classList.add("on"));
+      rules.forEach((r, i) => at(2200 + i * 600, () => r.classList.add(r.hasAttribute("data-hold") ? "hold" : "ok")));
+      at(4200, () => setP(2 / 3));
+      at(5000, () => stages[2].classList.add("on"));
+      at(6000, () => approve.classList.add("pressed"));
+      at(6600, () => setP(1));
+      at(7400, () => stages[3].classList.add("on"));
+      at(11000, play);
+    };
+    let started = false;
+    box.addEventListener("reveal", () => {
+      if (started) return;
+      started = true;
+      reduce ? showAll() : play();
+    });
+  });
+
   /* ---------- Tone selector cycle ---------- */
   document.querySelectorAll("[data-cycle]").forEach((row) => {
     const items = [...row.children];

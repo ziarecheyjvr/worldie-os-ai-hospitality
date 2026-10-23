@@ -108,7 +108,7 @@ body::before {
   font-family: var(--sans);
   font-weight: 400;
   letter-spacing: -0.035em;
-  line-height: 1.02;
+  line-height: 1.1;
   margin: 0;
   text-wrap: balance;
 }
@@ -129,7 +129,12 @@ body::before {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  padding-right: 0.06em;
+  /* Gradient text only paints inside its box: extend the box past descenders
+     (p, y, g) and the italic overhang, then pull it back so layout is unchanged */
+  padding: 0.04em 0.14em 0.2em 0.02em;
+  margin: -0.04em -0.08em -0.2em -0.02em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .lead { font-size: clamp(17px, 1.45vw, 20px); color: var(--muted); line-height: 1.6; max-width: 640px; margin: 0; text-wrap: pretty; }
@@ -655,7 +660,7 @@ body::before {
 .funnel__step::before { content: ""; position: absolute; inset: 0; width: var(--w); background: linear-gradient(90deg, rgba(212, 175, 55, 0.32), rgba(212, 175, 55, 0.06)); transform-origin: left; transform: scaleX(0); transition: transform 1.4s var(--ease); transition-delay: var(--d, 0s); }
 .is-in .funnel__step::before { transform: scaleX(1); }
 .funnel__step > * { position: relative; }
-.pull { font-family: var(--serif); font-style: italic; font-size: clamp(40px, 6vw, 88px); line-height: 1.02; letter-spacing: -0.02em; text-align: center; max-width: 1000px; margin: 0 auto; }
+.pull { font-family: var(--serif); font-style: italic; font-size: clamp(40px, 6vw, 88px); line-height: 1.12; letter-spacing: -0.02em; text-align: center; max-width: 1000px; margin: 0 auto; }
 
 .heatmap { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; }
 .heatmap i { aspect-ratio: 1; border-radius: 4px; background: rgba(212, 175, 55, var(--a)); }
