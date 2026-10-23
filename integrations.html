@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Integrations &amp; Trust: Worldie OS</title>
+  <meta name="description" content="Connected to your business. Guided by your rules. Worldie works alongside supported systems and channels, with the setup agreed around your operation." />
+  <meta name="theme-color" content="#050505" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .hub { position: relative; aspect-ratio: 1; max-width: 480px; width: 100%; margin: 0 auto; }
+    .hub svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hub svg path { fill: none; stroke: rgba(212,175,55,.25); stroke-width: .4; }
+    .hub svg path.flow { stroke: var(--gold-hi); stroke-width: .6; stroke-dasharray: 1.5 6; animation: flow 2s linear infinite; }
+    .hub__node { position: absolute; transform: translate(-50%,-50%); padding: 12px 18px; border-radius: 14px; font-weight: 500; font-size: 15px; white-space: nowrap; }
+    .hub__core { left: 50%; top: 50%; padding: 22px 26px; text-align: center; }
+    .trust { padding: clamp(28px, 3vw, 40px); display: grid; gap: 14px; align-content: start; }
+    .trust h3 { margin: 0; font-weight: 400; font-size: clamp(26px, 2.4vw, 34px); letter-spacing: -0.03em; line-height: 1.1; }
+    .trust p { margin: 0; color: var(--muted); }
+    .trust .note { color: var(--text); padding-left: 12px; border-left: 2px solid rgba(212,175,55,.5); }
+  </style>
+</head>
+<body data-page="integrations">
+  <div data-nav></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="hero__bg"><canvas data-globe='{"points":1000,"scale":0.5,"y":1.1,"arcs":8,"mouse":true,"tilt":0.7}'></canvas><div class="hero__beam"></div></div>
+      <div class="container page-hero__content">
+        <h1 class="h1" data-words>Connected to your business. <em>Guided by your rules.</em></h1>
+        <p class="lead reveal" style="--d:.4s">Worldie works alongside supported systems and channels, with the setup agreed around your operation.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:20px">
+      <div class="container">
+        <div class="hub reveal" style="margin-bottom:clamp(48px,6vw,80px)">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M50 50 L18 18"/><path class="flow" d="M50 50 L18 18"/>
+            <path d="M50 50 L82 18"/><path class="flow" d="M50 50 L82 18" style="animation-delay:-.5s"/>
+            <path d="M50 50 L18 82"/><path class="flow" d="M50 50 L18 82" style="animation-delay:-1s"/>
+            <path d="M50 50 L82 82"/><path class="flow" d="M50 50 L82 82" style="animation-delay:-1.5s"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(212,175,55,.1)" stroke-width=".3"/>
+          </svg>
+          <div class="hub__node glass" style="left:18%;top:18%">Your systems</div>
+          <div class="hub__node glass" style="left:82%;top:18%">Your channels</div>
+          <div class="hub__node glass" style="left:18%;top:82%">Your team</div>
+          <div class="hub__node glass" style="left:82%;top:82%">Your rules</div>
+          <div class="hub__node hub__core glass glass--gold"><span class="gold-text serif" style="font-size:26px">Worldie OS</span><div class="small muted">Staff approval</div></div>
+        </div>
+
+        <div class="grid-3">
+          <article class="trust glass spot reveal">
+            <span class="icon" data-icon="user"></span>
+            <h3>Keep people in control.</h3>
+            <p>Set responsibilities, access and approval requirements. Give your team the context to take over when human judgement matters.</p>
+            <p class="note">Bookings made through connected systems require staff approval.</p>
+          </article>
+          <article class="trust glass spot reveal" style="--d:.08s">
+            <span class="icon" data-icon="book"></span>
+            <h3>Knowledge before guesswork.</h3>
+            <p>Worldie draws on the business information you provide and checks replies for unsupported claims.</p>
+            <p>Questions it can’t resolve are brought back to your team, helping you improve its knowledge over time.</p>
+          </article>
+          <article class="trust glass spot reveal" style="--d:.16s">
+            <span class="icon" data-icon="lock"></span>
+            <h3>Access where it belongs.</h3>
+            <p>Role-based permissions, separate business environments and tools for handling customer data requests help you manage access and information responsibly.</p>
+          </article>
+        </div>
+
+        <div class="btn-row reveal" style="justify-content:center;margin-top:48px"><a class="btn btn--gold" href="book-a-demo.html">Discuss your systems and requirements <span data-icon="arrow"></span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <div data-footer></div>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

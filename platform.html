@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Platform: Worldie OS</title>
+  <meta name="description" content="Worldie brings customer-facing AI and behind-the-scenes workflows together, with the capabilities that fit your business." />
+  <meta name="theme-color" content="#050505" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="platform">
+  <div data-nav></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="hero__bg"><canvas data-globe='{"points":1200,"scale":0.5,"y":1.05,"arcs":10,"mouse":true,"tilt":0.6}'></canvas><div class="hero__beam"></div></div>
+      <div class="container page-hero__content">
+        <h1 class="h1" data-words>More than a conversation. <em>A connection to what happens next.</em></h1>
+        <p class="lead reveal" style="--d:.4s">Worldie brings customer-facing AI and behind-the-scenes workflows together, with the capabilities that fit your business.</p>
+      </div>
+    </section>
+
+    <!-- 01 AI team -->
+    <section class="feature">
+      <div class="container split">
+        <div class="stack">
+          <span class="feature__index reveal">01</span>
+          <h2 class="h2" data-words>Your AI team. <em>Your standards.</em></h2>
+          <p class="lead reveal">Configure specialists for reservations, experiences, facilities and more. Give each the knowledge and responsibilities it needs, with a tone that feels like your brand.</p>
+          <p class="lead reveal" style="color:var(--text)">When a person needs to step in, the conversation comes with them.</p>
+        </div>
+        <div class="routing glass reveal" data-routing>
+          <div class="ui__bar"><i></i><i></i><i></i><span>inbox</span><span class="routing__live"><i></i>Live</span></div>
+          <div class="routing__body">
+            <ul class="roster">
+              <li data-agent="concierge"><span class="roster__av">C</span><span class="roster__who"><b>Concierge</b><small>Reads every message</small></span><span class="roster__state">Listening</span></li>
+              <li data-agent="reservations"><span class="roster__av">R</span><span class="roster__who"><b>Reservations</b><small>Specialist</small></span><span class="roster__state"></span></li>
+              <li data-agent="experiences"><span class="roster__av">E</span><span class="roster__who"><b>Experiences</b><small>Specialist</small></span><span class="roster__state"></span></li>
+              <li data-agent="facilities"><span class="roster__av">F</span><span class="roster__who"><b>Facilities</b><small>Specialist</small></span><span class="roster__state"></span></li>
+              <li class="roster__add"><span class="roster__av">+</span><span class="roster__who"><b>And more</b><small>Configured for you</small></span></li>
+            </ul>
+            <div class="convo" aria-live="polite">
+              <div class="convo__guest" data-step="1"><span class="convo__meta" data-channel></span><p data-guest></p></div>
+              <div class="convo__read" data-step="2"><span class="tag tag--muted" data-intent></span><span class="tag tag--muted" data-mood></span><span class="tag tag--muted" data-lang></span></div>
+              <div class="convo__route" data-step="3"><span>Concierge</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><b data-to></b></div>
+              <div class="convo__reply" data-step="4"><p data-reply></p><span class="convo__meta" data-sign></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Channels -->
+    <section class="feature">
+      <div class="container split split--flip">
+        <div class="stack">
+          <span class="feature__index reveal">02</span>
+          <h2 class="h2" data-words>Your channels. <em>One connected conversation.</em></h2>
+          <p class="lead reveal">Website chat, WhatsApp, Instagram, Messenger and text—connected to the same business knowledge.</p>
+          <p class="lead reveal" style="color:var(--text)">Customers use the channels they prefer. Your team gets a clearer view of what’s happening.</p>
+        </div>
+        <div class="channels glass reveal">
+          <div class="channels__hub"><span class="gold-text serif">Worldie</span></div>
+          <span class="channels__node" style="--a:-90deg"><span data-icon="web"></span>Website chat</span>
+          <span class="channels__node" style="--a:-18deg"><span data-icon="whatsapp"></span>WhatsApp</span>
+          <span class="channels__node" style="--a:54deg"><span data-icon="instagram"></span>Instagram</span>
+          <span class="channels__node" style="--a:126deg"><span data-icon="messenger"></span>Messenger</span>
+          <span class="channels__node" style="--a:198deg"><span data-icon="sms"></span>Text</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Bookings -->
+    <section class="feature">
+      <div class="container split">
+        <div class="stack">
+          <span class="feature__index reveal">03</span>
+          <h2 class="h2" data-words>Bookings, requests <em>and opportunities.</em></h2>
+          <p class="lead reveal">Help customers explore services, find availability and take the next step.</p>
+          <p class="lead reveal">Use relevant booking tools, waitlists and supported integrations, with approval controls for actions that need your team.</p>
+        </div>
+        <div class="ui glass reveal">
+          <div class="ui__bar"><i></i><i></i><i></i><span>bookings · tonight</span></div>
+          <div class="ui__body">
+            <div class="row"><span>20:00 · Table for 6</span><span class="tag tag--red">Full</span></div>
+            <div class="row" style="border-color:rgba(212,175,55,.35);background:rgba(212,175,55,.06)"><span>Alternatives offered: 19:15 · 21:30</span><span class="tag">Suggested</span></div>
+            <div class="row"><span>Waitlist · James P.</span><span class="tag tag--green">Notified</span></div>
+            <div class="glass glass--gold" style="padding:16px;border-radius:16px;display:grid;gap:10px">
+              <span class="mono small" style="color:var(--gold-hi)">APPROVAL REQUIRED</span>
+              <span>Private dining · 12 guests · Sat 21:00</span>
+              <div class="btn-row"><span class="btn btn--gold btn--sm">Approve</span><span class="btn btn--glass btn--sm">Decline</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Customer knowledge -->
+    <section class="feature">
+      <div class="container split split--flip">
+        <div class="stack">
+          <span class="feature__index reveal">04</span>
+          <h2 class="h2" data-words>Customer knowledge <em>that stays useful.</em></h2>
+          <p class="lead reveal">Bring conversations, preferences, requests and history into one place.</p>
+          <p class="lead reveal">Support more personal service, more relevant follow-ups and better continuity between team members.</p>
+        </div>
+        <div class="ui glass reveal">
+          <div class="ui__bar"><i></i><i></i><i></i><span>customers / elena-r</span></div>
+          <div class="ui__body">
+            <div style="display:flex;align-items:center;gap:14px"><span class="agent__orb" style="width:52px;height:52px;font-size:20px">E</span><div><b style="font-weight:500">Elena R.</b><div class="small muted">3rd visit · speaks ES, EN</div></div><span class="tag" style="margin-left:auto">VIP</span></div>
+            <div class="row"><span>Preferences</span><span class="muted">Sea view · gluten-free</span></div>
+            <div class="row"><span>Last conversation</span><span class="muted">Anniversary dinner · WhatsApp</span></div>
+            <div class="row"><span>Open request</span><span class="tag">Flowers on arrival</span></div>
+            <div class="row"><span>Handled by</span><span class="muted">Front desk · Reservations</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Less repetition -->
+    <section class="feature">
+      <div class="container split">
+        <div class="stack">
+          <span class="feature__index reveal">05</span>
+          <h2 class="h2" data-words>Less repetition <em>behind the scenes.</em></h2>
+          <p class="lead reveal">Route requests, escalate overdue tasks and automate appropriate follow-ups.</p>
+          <p class="lead reveal">From review requests to customer campaigns, Worldie helps your team stay consistent without handling every step manually.</p>
+        </div>
+        <div class="ui glass reveal">
+          <div class="ui__bar"><i></i><i></i><i></i><span>workflows</span></div>
+          <div class="ui__body timeline" style="padding-left:24px">
+            <div class="tl"><span class="tl__dot"></span><div><time>REQUEST RECEIVED</time><p>Routed to Housekeeping with the conversation attached</p></div></div>
+            <div class="tl"><span class="tl__dot"></span><div><time>NOT HANDLED IN TIME</time><p>Escalated to the duty manager</p></div></div>
+            <div class="tl"><span class="tl__dot"></span><div><time>AFTER THE VISIT</time><p>Review request sent</p></div></div>
+            <div class="tl" style="padding-bottom:0"><span class="tl__dot"></span><div><time>CAMPAIGN</time><p>Seasonal menu, sent to returning customers</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Intelligence for management -->
+    <section class="feature">
+      <div class="container split split--flip">
+        <div class="stack">
+          <span class="feature__index reveal">06</span>
+          <h2 class="h2" data-words>Intelligence that comes back <em>to management.</em></h2>
+          <p class="lead reveal">Daily knowledge suggestions highlight questions Worldie couldn’t answer. Operational summaries show what happened and what needs attention.</p>
+          <p class="lead reveal" style="color:var(--text)">Your team can use both to improve the information—and the service—behind the next conversation.</p>
+        </div>
+        <div class="ui glass reveal">
+          <div class="ui__bar"><i></i><i></i><i></i><span>daily summary · 07:00</span></div>
+          <div class="ui__body">
+            <span class="mono small dim">KNOWLEDGE SUGGESTIONS</span>
+            <div class="row"><span>“Is there parking for a coach?”</span><span class="tag tag--muted">Asked 6×</span></div>
+            <div class="row"><span>“Do you have a vegan tasting menu?”</span><span class="tag tag--muted">Asked 3×</span></div>
+            <span class="mono small dim" style="margin-top:6px">NEEDS ATTENTION</span>
+            <div class="row"><span>2 requests overdue</span><span class="tag tag--red">Review</span></div>
+            <span class="mono small dim" style="margin-top:6px">BUSIEST HOURS</span>
+            <div class="heatmap" id="heat"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="btn-row reveal" style="justify-content:center"><a class="btn btn--gold" href="book-a-demo.html">Explore your setup <span data-icon="arrow"></span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <div data-footer></div>
+  <script>
+    // Busiest-hours heatmap: 7 days × 12 two-hour slots
+    const heat = document.getElementById("heat");
+    for (let d = 0; d < 7; d++) for (let h = 0; h < 12; h++) {
+      const evening = Math.exp(-((h - 9.5) ** 2) / 4), morning = Math.exp(-((h - 4.5) ** 2) / 3) * 0.6;
+      const weekend = d >= 4 ? 1.25 : 1;
+      const i = document.createElement("i");
+      i.style.setProperty("--a", Math.min(0.95, 0.06 + (evening + morning) * 0.7 * weekend).toFixed(2));
+      heat.append(i);
+    }
+  </script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
