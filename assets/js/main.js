@@ -165,7 +165,7 @@
           io.unobserve(e.target);
         }
       }),
-    { threshold: 0.18, rootMargin: "0px 0px -6% 0px" }
+    { threshold: 0.08, rootMargin: "0px 0px -2% 0px" }
   );
   document.querySelectorAll(".reveal, .words, [data-observe]").forEach((el) => io.observe(el));
   // Catch anything skipped by a fast scroll or anchor jump
@@ -234,7 +234,7 @@
 
     let w, h, dpr, R, cx, cy, rot = 0, visible = true, mx = 0, my = 0;
     const resize = () => {
-      dpr = Math.min(devicePixelRatio || 1, 2);
+      dpr = Math.min(devicePixelRatio || 1, 1.5); // soft dots don't need full Retina resolution
       w = canvas.clientWidth; h = canvas.clientHeight;
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -324,7 +324,7 @@
     const ctx = canvas.getContext("2d");
     let w, h, visible = true;
     const resize = () => {
-      const d = Math.min(devicePixelRatio || 1, 2);
+      const d = Math.min(devicePixelRatio || 1, 1.5);
       w = canvas.clientWidth; h = canvas.clientHeight;
       canvas.width = w * d; canvas.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0);
     };
