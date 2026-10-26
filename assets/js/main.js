@@ -59,26 +59,35 @@
   const logo = `<picture><source srcset="assets/img/worldie-logo.webp" type="image/webp" /><img class="brand__logo" src="assets/img/worldie-logo.png" alt="Worldie" width="1062" height="251" /></picture>`;
 
   /* ---------- Nav + footer ---------- */
-  const OS_URL = "https://os.worldie.ai/";
   const LOGIN_URL = "https://os.worldie.ai/login";
-  // Header links follow the client copy's footer order
-  const links = [
-    ["platform.html", "Platform", "platform"],
-    ["who-its-for.html", "Who It’s For", "who"],
-    ["results.html", "Results", "results"],
-    ["integrations.html", "Integrations & Trust", "integrations"],
-    ["creators.html", "Bridge Network", "creators"],
+  // Main navigation from the client copy; Intelligence & language, Integrations & trust
+  // and FAQs sit in the Solutions menu (and the footer)
+  const solutionsMenu = [
+    ["solutions.html", "Solutions", "solutions"],
+    ["intelligence.html", "Intelligence & language", "intelligence"],
+    ["integrations-and-trust.html", "Integrations & trust", "integrations"],
+    ["faqs.html", "FAQs", "faqs"],
   ];
-  const ext = '<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+  const links = [
+    ["bridge-network.html", "Creator Bridge", "bridge"],
+    ["how-it-works.html", "How it works", "how"],
+    ["who-its-for.html", "Who it’s for", "who"],
+    ["results.html", "Results", "results"],
+  ];
+  const navLink = ([h, l, k]) => `<a href="${h}" class="${k === page ? "is-active" : ""}">${l}</a>`;
+  const solutionsActive = solutionsMenu.some(([, , k]) => k === page);
   const navHost = document.querySelector("[data-nav]");
   if (navHost) {
     navHost.outerHTML = `
     <nav class="nav" aria-label="Primary">
       <div class="nav__inner">
-        <a class="brand" href="index.html" aria-label="Worldie OS home">${logo}</a>
+        <a class="brand" href="index.html" aria-label="Worldie home">${logo}</a>
         <div class="nav__links">
-          ${links.map(([h, l, k]) => `<a href="${h}" class="${k === page ? "is-active" : ""}">${l}</a>`).join("")}
-          <a class="nav__ext" href="${OS_URL}" target="_blank" rel="noopener">Worldie OS ${ext}</a>
+          <div class="nav__drop">
+            <a href="solutions.html" class="nav__trigger ${solutionsActive ? "is-active" : ""}" aria-haspopup="true">Solutions <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+            <div class="nav__menu">${solutionsMenu.map(navLink).join("")}</div>
+          </div>
+          ${links.map(navLink).join("")}
         </div>
         <div class="nav__cta">
           <a class="btn btn--glass btn--sm nav__login" href="${LOGIN_URL}">Client Login</a>
@@ -88,8 +97,8 @@
       </div>
     </nav>
     <div class="mobile-menu" aria-hidden="true">
-      ${links.map(([h, l], i) => `<a href="${h}" style="transition-delay:${i * 30}ms">${l}</a>`).join("")}
-      <a href="${OS_URL}" target="_blank" rel="noopener" style="color:var(--gold-hi);transition-delay:${links.length * 30}ms">Worldie OS ${ext}</a>
+      ${[solutionsMenu[0], ...links, solutionsMenu[1], solutionsMenu[2], ["creators.html", "For Creators"], solutionsMenu[3]]
+        .map(([h, l], i) => `<a href="${h}" style="transition-delay:${i * 30}ms">${l}</a>`).join("")}
       <div class="btn-row">
         <a class="btn btn--glass" href="${LOGIN_URL}">Client Login</a>
         <a class="btn btn--gold" href="book-a-demo.html">Book a demo ${svg("arrow")}</a>
@@ -112,15 +121,15 @@
       <div class="container">
         <div class="footer__top">
           <div class="stack" style="gap:18px">
-            <a class="brand brand--footer" href="index.html" aria-label="Worldie OS home">${logo}</a>
-            <p class="mono small" style="margin:0;letter-spacing:.16em;color:var(--gold-hi)">WORLDIE OS</p>
-            <p class="serif gold-text" style="margin:0;font-size:24px;line-height:1.2;max-width:340px">Built for hospitality. Bespoke to your business.</p>
+            <a class="brand brand--footer" href="index.html" aria-label="Worldie home">${logo}</a>
+            <p style="margin:0;font-size:18px;color:var(--text)">Worldie — Bespoke AI for hospitality.</p>
+            <p class="gold-text" style="margin:0;font-size:16px;line-height:1.5;max-width:380px">Creator partnerships. Connected service. Clearer results. Powered by Worldie OS.</p>
           </div>
           <nav class="footer__links" aria-label="Footer">
-            <a href="platform.html">Platform</a><a href="who-its-for.html">Who It’s For</a><a href="results.html">Results</a><a href="integrations.html">Integrations &amp; Trust</a><a href="creators.html">Bridge Network</a><a href="creators.html#creators">Creators</a><a href="book-a-demo.html">Book a Demo</a>
+            <a href="solutions.html">Solutions</a><a href="bridge-network.html">Creator Bridge</a><a href="intelligence.html">Intelligence &amp; language</a><a href="how-it-works.html">How it works</a><a href="who-its-for.html">Who it’s for</a><a href="results.html">Results</a><a href="integrations-and-trust.html">Integrations &amp; trust</a><a href="creators.html">For Creators</a><a href="faqs.html">FAQs</a><a href="book-a-demo.html">Book a demo</a>
           </nav>
         </div>
-        <div class="footer__bottom"><span>© 2026 Worldie. All rights reserved.</span><span class="footer__legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Data Requests</a></span></div>
+        <div class="footer__bottom"><span>© 2026 Worldie. All rights reserved.</span><span class="footer__legal"><a href="#">Privacy Notice</a><a href="#">Cookie Policy</a><a href="#">Terms</a><a href="#">Data Requests</a></span></div>
       </div>
     </footer>`;
   }
@@ -597,11 +606,59 @@
   /* ---------- Demo form ---------- */
   const form = document.querySelector("[data-demo-form]");
   if (form) {
+    // Sector cards on "Who it's for" link here with ?type=… to preselect the business type
+    const type = new URLSearchParams(location.search).get("type");
+    const select = form.querySelector("select[name=type]");
+    if (type && select && select.querySelector(`option[value="${CSS.escape(type)}"]`)) select.value = type;
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (!form.reportValidity()) return;
+      if (!form.checkValidity()) {
+        form.classList.add("has-errors");
+        form.querySelector(":invalid").focus();
+        return;
+      }
+      form.classList.remove("has-errors");
       form.classList.add("is-sent");
       form.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
     });
   }
+
+  /* ---------- Journey strips: steps light up in order along the track ---------- */
+  document.querySelectorAll("[data-journey]").forEach((box) => {
+    const steps = [...box.querySelectorAll(".journey__steps li")];
+    const nodes = steps.map((li) => li.querySelector(".journey__node"));
+    const track = box.querySelector(".journey__track");
+    // Run the track from the first node's centre to the last (row or column layout)
+    const fit = () => {
+      const b = box.getBoundingClientRect();
+      const c = (n) => { const r = n.getBoundingClientRect(); return [r.left + r.width / 2 - b.left, r.top + r.height / 2 - b.top]; };
+      const [x1, y1] = c(nodes[0]), [x2, y2] = c(nodes[nodes.length - 1]);
+      const vertical = Math.abs(x2 - x1) < 2;
+      Object.assign(track.style, vertical
+        ? { left: `${x1 - 1}px`, top: `${y1}px`, width: "2px", height: `${y2 - y1}px` }
+        : { left: `${x1}px`, top: `${y1 - 1}px`, width: `${x2 - x1}px`, height: "2px" });
+    };
+    fit();
+    addEventListener("resize", fit);
+    const setP = (p) => box.style.setProperty("--p", p);
+    const last = steps.length - 1;
+    let timers = [];
+    const play = () => {
+      timers.forEach(clearTimeout); timers = [];
+      steps.forEach((s) => s.classList.remove("on"));
+      setP(0);
+      steps.forEach((s, i) => {
+        timers.push(setTimeout(() => { setP(i / last); }, 300 + i * 1100));
+        timers.push(setTimeout(() => s.classList.add("on"), 300 + i * 1100 + (i ? 700 : 0)));
+      });
+      timers.push(setTimeout(play, 300 + steps.length * 1100 + 2600));
+    };
+    let started = false;
+    box.addEventListener("reveal", () => {
+      if (started) return;
+      started = true;
+      if (reduce) { steps.forEach((s) => s.classList.add("on")); setP(1); } else play();
+    });
+  });
 })();

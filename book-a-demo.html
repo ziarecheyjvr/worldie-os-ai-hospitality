@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Book a Demo: Worldie OS</title>
-  <meta name="description" content="Let’s build your Worldie setup. Tell us how your business works, where your team loses time and what you’d like to improve." />
+  <title>Book a Hospitality AI Demo | Worldie</title>
+  <meta name="description" content="See how creator partnerships, customer service and operations connect with Worldie. Explore an AI setup tailored to your hospitality business." />
   <meta name="theme-color" content="#050505" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,12 +19,13 @@
       <div class="hero__bg"><canvas data-globe='{"points":1200,"scale":0.45,"x":0.82,"y":0.55,"arcs":10,"mouse":true,"tilt":0.4}'></canvas></div>
       <div class="container split" style="align-items:start">
         <div class="stack" style="position:sticky;top:130px">
-          <h1 class="h1" data-words>Let’s build your <em>Worldie setup.</em></h1>
-          <p class="lead reveal" style="--d:.2s">Tell us how your business works, where your team loses time and what you’d like to improve.</p>
-          <p class="lead reveal" style="--d:.25s;color:var(--text)">We’ll show you the relevant capabilities and discuss a setup shaped around your operation.</p>
+          <span class="eyebrow reveal"><span class="dot"></span>Book a demo</span>
+          <h1 class="h1" data-words>Let’s make it relevant <em>to your business.</em></h1>
+          <p class="lead reveal" style="--d:.2s">Tell us what you run, how you attract customers and where your team needs support. We’ll show you how creator partnerships, customer service and operations can connect in a setup shaped around your business.</p>
         </div>
 
-        <form class="form glass reveal" data-demo-form style="--d:.3s">
+        <form class="form glass reveal" data-demo-form novalidate style="--d:.15s">
+          <p class="form__error" role="alert">Please check the highlighted fields and try again.</p>
           <div class="two">
             <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required /></div>
             <div class="field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
@@ -33,46 +34,32 @@
           <div class="two">
             <div class="field"><label for="f-type">Business type</label>
               <select id="f-type" name="type" required>
-                <option value="">Select…</option>
-                <option>Hotels, resorts and accommodation</option>
-                <option>Restaurants and bars</option>
-                <option>Spas and wellness businesses</option>
-                <option>Members’ clubs</option>
-                <option>Marinas and yacht businesses</option>
-                <option>Tours and experiences</option>
-                <option>Other</option>
+                <option value=""></option>
+                <option value="restaurants">Restaurants, bars and nightlife</option>
+                <option value="spas">Spas, wellness and fitness</option>
+                <option value="clubs">Members’ clubs and coworking</option>
+                <option value="marinas">Marinas and yacht businesses</option>
+                <option value="hotels">Hotels, resorts and serviced accommodation</option>
+                <option value="villas">Villas, rentals, holiday parks and hostels</option>
+                <option value="experiences">Tour operators, experiences and event venues</option>
               </select>
             </div>
-            <div class="field"><label for="f-count">Number of locations</label><input id="f-count" name="locations" type="number" min="1" value="1" /></div>
+            <div class="field"><label for="f-count">Number of locations</label><input id="f-count" name="locations" type="number" min="1" required /></div>
           </div>
-          <div class="field"><label for="f-help">What would you like Worldie to help with?</label><textarea id="f-help" name="help"></textarea></div>
+          <div class="two">
+            <div class="field"><label for="f-country">Country</label><input id="f-country" name="country" autocomplete="country-name" required /></div>
+            <div class="field"><label for="f-systems">Current systems or channels (optional)</label><input id="f-systems" name="systems" /></div>
+          </div>
+          <div class="field"><label for="f-help">What would you like Worldie to help with?</label><textarea id="f-help" name="help" placeholder="Tell us about your creator partnerships, customer experience or day-to-day work—and what you would like to improve."></textarea></div>
           <button class="btn btn--gold" type="submit" style="width:100%">Book my demo <span data-icon="arrow"></span></button>
-          <p class="small dim center" style="margin:0">Configuration and onboarding are handled by the Worldie team.</p>
+          <p class="small dim center" style="margin:0">Personally configured and onboarded by the Worldie team.</p>
+          <p class="form__privacy">We’ll use these details to respond to your enquiry. Read our <a href="#">Privacy Notice</a>.</p>
 
           <div class="form__thanks">
             <span class="play" style="width:76px"><span data-icon="check" style="width:40%;margin:0"></span></span>
-            <h2 class="h3">Thank you.</h2>
-            <p class="muted" style="margin:0;max-width:380px">A member of the Worldie team will be in touch shortly to arrange your demo.</p>
+            <p class="lead" style="margin:0;max-width:420px;color:var(--text)">Thank you. Your enquiry is with the Worldie team. We’ll be in touch to arrange a demo around your business.</p>
           </div>
         </form>
-      </div>
-    </section>
-
-    <section class="section" id="faq" style="padding-top:0">
-      <div class="container">
-        <div class="section-head center">
-          <h2 class="h2" data-words>Frequently asked <em>questions.</em></h2>
-        </div>
-        <div class="faq">
-          <details class="glass reveal"><summary>Is Worldie bespoke?<span class="pm"></span></summary><div class="ans"><p>Your setup is. We tailor the features, AI specialists, knowledge and workflows around your business, using the Worldie OS platform.</p><p>You get a personalised implementation without developing a new system from scratch.</p></div></details>
-          <details class="glass reveal"><summary>Does it keep learning?<span class="pm"></span></summary><div class="ans"><p>Worldie identifies questions it couldn’t answer and sends management daily suggestions for improving its knowledge.</p><p>Your team reviews the gaps and adds the correct information, which Worldie can use in future conversations. It improves with your business, while you remain in control of the knowledge it uses.</p></div></details>
-          <details class="glass reveal"><summary>Do we need every feature?<span class="pm"></span></summary><div class="ans"><p>No. We configure the capabilities relevant to your operation. The aim is to give you what you need—not overwhelm your team with what you don’t.</p></div></details>
-          <details class="glass reveal"><summary>Does it replace our team?<span class="pm"></span></summary><div class="ans"><p>Worldie supports your people by handling routine conversations and helping organise the work behind them. Questions and decisions that need a person come back to your team with context.</p></div></details>
-          <details class="glass reveal"><summary>Can it make bookings?<span class="pm"></span></summary><div class="ans"><p>Worldie supports bookings, booking requests and booking links, depending on your setup. Approval requirements are agreed during configuration; bookings through connected systems require staff approval.</p></div></details>
-          <details class="glass reveal"><summary>Does it work with our existing systems?<span class="pm"></span></summary><div class="ans"><p>We’ll review your systems during the demo and confirm which connections are supported, what is involved and any limitations before agreeing your setup.</p></div></details>
-          <details class="glass reveal"><summary>How long does onboarding take?<span class="pm"></span></summary><div class="ans"><p>That depends on your channels, integrations, information and configuration. We’ll agree the scope and launch plan with you before getting started.</p></div></details>
-          <details class="glass reveal"><summary>How much does it cost?<span class="pm"></span></summary><div class="ans"><p>Pricing reflects your agreed setup and requirements. We’ll scope the right configuration with you and provide a proposal.</p></div></details>
-        </div>
       </div>
     </section>
   </main>

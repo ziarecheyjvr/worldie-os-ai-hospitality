@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/platform", "destination": "/solutions", "permanent": true },
+    { "source": "/integrations", "destination": "/integrations-and-trust", "permanent": true }
+  ]
+}
