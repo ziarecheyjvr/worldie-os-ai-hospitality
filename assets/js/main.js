@@ -90,6 +90,7 @@
           ${links.map(navLink).join("")}
         </div>
         <div class="nav__cta">
+          <a class="nav__agency ${page === "agency" ? "is-active" : ""}" href="agency.html">Worldie Agency</a>
           <a class="btn btn--glass btn--sm nav__login" href="${LOGIN_URL}">Client Login</a>
           <a class="btn btn--gold btn--sm" href="book-a-demo.html">Book a demo ${svg("arrow")}</a>
           <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
@@ -97,7 +98,7 @@
       </div>
     </nav>
     <div class="mobile-menu" aria-hidden="true">
-      ${[solutionsMenu[0], ...links, solutionsMenu[1], solutionsMenu[2], ["creators.html", "For Creators"], solutionsMenu[3]]
+      ${[solutionsMenu[0], ...links, solutionsMenu[1], solutionsMenu[2], ["creators.html", "For Creators"], solutionsMenu[3], ["agency.html", "Worldie Agency"]]
         .map(([h, l], i) => `<a href="${h}" style="transition-delay:${i * 30}ms">${l}</a>`).join("")}
       <div class="btn-row">
         <a class="btn btn--glass" href="${LOGIN_URL}">Client Login</a>
@@ -126,7 +127,7 @@
             <p class="gold-text" style="margin:0;font-size:16px;line-height:1.5;max-width:380px">Creator partnerships. Connected service. Clearer results. Powered by Worldie OS.</p>
           </div>
           <nav class="footer__links" aria-label="Footer">
-            <a href="solutions.html">Solutions</a><a href="bridge-network.html">Creator Bridge</a><a href="intelligence.html">Intelligence &amp; language</a><a href="how-it-works.html">How it works</a><a href="who-its-for.html">Who it’s for</a><a href="results.html">Results</a><a href="integrations-and-trust.html">Integrations &amp; trust</a><a href="creators.html">For Creators</a><a href="faqs.html">FAQs</a><a href="book-a-demo.html">Book a demo</a>
+            <a href="solutions.html">Solutions</a><a href="bridge-network.html">Creator Bridge</a><a href="intelligence.html">Intelligence &amp; language</a><a href="how-it-works.html">How it works</a><a href="who-its-for.html">Who it’s for</a><a href="results.html">Results</a><a href="integrations-and-trust.html">Integrations &amp; trust</a><a href="creators.html">For Creators</a><a href="faqs.html">FAQs</a><a href="book-a-demo.html">Book a demo</a><a href="agency.html">Worldie Agency</a>
           </nav>
         </div>
         <div class="footer__bottom"><span>© 2026 Worldie. All rights reserved.</span><span class="footer__legal"><a href="#">Privacy Notice</a><a href="#">Cookie Policy</a><a href="#">Terms</a><a href="#">Data Requests</a></span></div>
