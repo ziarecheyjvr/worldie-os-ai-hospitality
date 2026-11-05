@@ -1063,3 +1063,9 @@ body { font-weight: 400; letter-spacing: -0.005em; }
 .nav__agency { font-size: 14px; color: var(--muted); padding: 0 6px; white-space: nowrap; transition: color 0.3s; }
 .nav__agency:hover, .nav__agency.is-active { color: var(--gold-hi); }
 @media (max-width: 1240px) { .nav__agency { display: none; } }
+
+/* Demo form: sending state, send failure, hidden spam trap */
+.form.is-sending button[type="submit"] { opacity: 0.6; pointer-events: none; }
+.form.send-failed .form__send-error { display: block; }
+.form__send-error { display: none; margin: 0; padding: 12px 14px; border-radius: 12px; font-size: 14px; color: #ffb3b5; background: rgba(229, 72, 77, 0.1); border: 1px solid rgba(229, 72, 77, 0.35); }
+.form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

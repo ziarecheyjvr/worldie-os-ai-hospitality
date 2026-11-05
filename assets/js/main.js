@@ -612,14 +612,37 @@
     const select = form.querySelector("select[name=type]");
     if (type && select && select.querySelector(`option[value="${CSS.escape(type)}"]`)) select.value = type;
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (form.classList.contains("is-sending")) return;
+      form.classList.remove("send-failed");
       if (!form.checkValidity()) {
         form.classList.add("has-errors");
         form.querySelector(":invalid").focus();
         return;
       }
       form.classList.remove("has-errors");
+      form.classList.add("is-sending");
+
+      // Send the readable business type, not the short value used for preselecting
+      const payload = Object.fromEntries(new FormData(form));
+      payload.type = select.options[select.selectedIndex].text;
+
+      let sent = false;
+      try {
+        const res = await fetch("/api/demo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        sent = res.ok;
+      } catch {}
+
+      form.classList.remove("is-sending");
+      if (!sent) {
+        form.classList.add("send-failed");
+        return;
+      }
       form.classList.add("is-sent");
       form.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
     });

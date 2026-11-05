@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Old addresses
+RewriteRule ^platform/?$ /solutions [R=301,L]
+RewriteRule ^integrations/?$ /integrations-and-trust [R=301,L]
+
+# Demo form endpoint: /api/demo runs api/demo.php
+RewriteRule ^api/demo/?$ api/demo.php [L]
+
+# Clean addresses: /solutions serves solutions.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
